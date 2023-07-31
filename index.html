@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>analog clock</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            color: #fff;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: black;
+        }
+
+        .container {
+            position: relative;
+        }
+
+        .clock {
+            height: 600px;
+            width: 600px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 70px solid rgba(255, 255, 255, 0.25);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+
+        .clock span {
+            position: absolute;
+            transform: rotate(calc(30deg * var(--i)));
+            inset: 12px;
+            text-align: center;
+        }
+
+        .clock span b {
+            transform: rotate(calc(-30deg * var(--i)));
+            display: inline-block;
+        }
+
+        .clock::before {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #fff;
+            justify-content: flex-end;
+        }
+
+        .line1 i {
+            position: absolute;
+            width: 18px;
+            height: 150px;
+            border-radius: 80%;
+            background-color: var(--clr);
+        }
+
+
+        .line2 i {
+            position: absolute;
+            width: 10px;
+            height: 200px;
+            border-radius: 80%;
+            background-color: var(--clr);
+        }
+
+
+        .line3 i {
+            position: absolute;
+            width: 6px;
+            height: 250px;
+            border-radius: 50%;
+            background-color: var(--clr);
+        }
+
+        i {
+            height: 4px;
+            width: 4px;
+            background-color: #fff;
+            border-radius: 50%;
+        }
+
+        .line1 {
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+        }
+
+
+        .line2 {
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: end;
+        }
+
+
+        .line3 {
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="clock">
+            <div style="--clr:orange;" id="hour" class="line1"><i><i></i></i></div>
+            <div style="--clr:white;" id="min" class="line2"><i></i></div>
+            <div style="--clr:yellow;" id="sec" class="line3"><i></i></div>
+
+            <span style="--i:1;"> <b>1</b> </span>
+            <span style="--i:2;"> <b>2</b> </span>
+            <span style="--i:3;"> <b>3</b> </span>
+            <span style="--i:4;"> <b>4</b> </span>
+            <span style="--i:5;"> <b>5</b> </span>
+            <span style="--i:6;"> <b>6</b> </span>
+            <span style="--i:7;"> <b>7</b> </span>
+            <span style="--i:8;"> <b>8</b> </span>
+            <span style="--i:9;"> <b>9</b> </span>
+            <span style="--i:10;"> <b>10</b> </span>
+            <span style="--i:11;"> <b>11</b> </span>
+            <span style="--i:12;"> <b>12</b> </span>
+        </div>
+    </div>
+    <script>
+        let hr = document.getElementById("hour");
+        let min = document.getElementById("min");
+        let sec = document.getElementById("sec");
+
+        function displayTime() {
+            let date = new Date();
+
+            let hh = date.getHours();
+            let mm = date.getMinutes();
+            let ss = date.getSeconds();
+
+            let hRotation = 30 * hh + .5 * mm;
+            let mRotation = 6 * mm;
+            let sRotation = 6 * ss;
+
+            hr.style.transform = `rotate(${hRotation}deg)`;
+            min.style.transform = `rotate(${mRotation}deg)`;
+            sec.style.transform = `rotate(${sRotation}deg)`;
+        }
+        setInterval(displayTime, 1000)
+
+    </script>
+    <script type="text/javascript" src="javascriptPractice.js"></script>
+
+
+    <?php
+    $servername = "localhost";
+    $username = "username";
+    $password = "password";
+    $dbname = "myDB";
+    
+    // Create connection
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    // Check connection
+    if ($conn->connect_error) {
+      die("Connection failed: " . $conn->connect_error);
+    }
+    
+    $sql = "INSERT INTO MyGuests (firstname, lastname, email)
+    VALUES ('John', 'Doe', 'john@example.com')";
+    
+    if ($conn->query($sql) === TRUE) {
+      echo "New record created successfully";
+    } else {
+      echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+    
+    $conn->close();
+    ?>
+</body>
+
+</html>
